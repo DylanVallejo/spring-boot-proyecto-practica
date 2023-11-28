@@ -17,7 +17,7 @@ public class ResourceNotFoundExeption extends RuntimeException{
 
     public ResourceNotFoundExeption(String nombreDelRecurso, String nombreDelCampo, long valorDelCampo) {
 //        '%s' usar esto significa que recibira parametros
-        super(String.format(" %s publicacion no encontrada con : %s : '%s' ",nombreDelRecurso,nombreDelCampo,valorDelCampo));
+        super(String.format(" %s no encontrada con : %s : '%s' ",nombreDelRecurso,nombreDelCampo,valorDelCampo));
         this.nombreDelRecurso = nombreDelRecurso;
         this.nombreDelCampo = nombreDelCampo;
         this.valorDelCampo = valorDelCampo;

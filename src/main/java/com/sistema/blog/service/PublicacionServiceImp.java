@@ -70,6 +70,15 @@ public class PublicacionServiceImp implements PublicacionService{
 
     }
 
+//  al eliminar datos retorna un tipo void y no reuqiero de un return statement
+    @Override
+    public void eliminarPublicacion(long id){
+        Publicacion publicacion = publicacionRepository.findById(id).orElseThrow(()->new ResourceNotFoundExeption("Publicacion", "id", id));
+//        primero busco por id y luego elimino la entidad
+        publicacionRepository.delete(publicacion);
+    }
+
+
 
     //    CONVIERTE la entidad a un DTO
     private PublicacionDTO mapearDTO(Publicacion publicacion){

@@ -18,6 +18,10 @@ public class PublicacionController {
     @Autowired
     private PublicacionService publicacionService;
 
+    @GetMapping
+    public List<PublicacionDTO> listarPublicaciones(){
+        return publicacionService.obtenerTodasLasPublicaciones();
+    }
 
     @PostMapping
 //    @RequestBody nos indica que los valores se obtendran  del body enviado desde el cliente
@@ -25,21 +29,24 @@ public class PublicacionController {
         return new ResponseEntity<>(publicacionService.crearPublicacion(publicacionDTO), HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public List<PublicacionDTO> listarPublicaciones(){
-        return publicacionService.obtenerTodasLasPublicaciones();
-    }
 
-//establecer la ruta con llaves significa que sera un parametor a tomar
+//establecer la ruta con llaves significa que sera un parametro o variable a tomar
     @GetMapping("/{id}")
-    public ResponseEntity<PublicacionDTO> obtenerPublciacionPorId(@PathVariable(name="id") long id){
+    public ResponseEntity<PublicacionDTO> obtenerPublicacionPorId(@PathVariable(name="id") long id){
         return ResponseEntity.ok(publicacionService.obtenerPublicacionPorId(id));
     }
-
 
     @PutMapping("/{id}")
     public ResponseEntity<PublicacionDTO> actualizarPublicacion(@RequestBody PublicacionDTO publicacionDTO, @PathVariable(name="id") long id){
         PublicacionDTO publicacionResponse = publicacionService.actualizarPublicacion(publicacionDTO,id);
         return new ResponseEntity<>(publicacionResponse, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminarPublicacion(@PathVariable(name = "id") long id){
+        publicacionService.eliminarPublicacion(id);
+        return new ResponseEntity<>("Publicacion eliminada.", HttpStatus.OK);
+
+    }
+
 }
