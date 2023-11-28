@@ -1,18 +1,17 @@
-package com.sistema.blog.entity;
+package com.sistema.blog.dto;
 
-import jakarta.persistence.*;
-//con este entidad creamos directamente al ejecutar el programa la tabla publicaciones con sus respectivos campos
-@Entity
-@Table(name = "publicaciones",uniqueConstraints = {@UniqueConstraint(columnNames = "titulo")})
-public class Publicacion {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PublicacionDTO {
+
+//    DTO(DATA TRANSFRE OBJECT) sirven para  trasnferir datos reduciendo la
+//    cantidad de inforamcion transferida evitando exponer la estructura interna de los objetos
+//    no se debe confundir con un DAO(DATA ACCES OBJECT) que sera el encargado de realizar las operaciones CRUD
+
+//    EN RESUMEN EL DTO MANDA LA INFO NECESARIA AL DAO PARA SU RESPECTIVA MANIPULACION EN LA BASE
+
+
     private Long id;
-    @Column(name="titulo", nullable = false)
     private String titulo;
-    @Column(name="descripcion", nullable = false)
     private String descripcion;
-    @Column(name="contenido", nullable = false)
     private String contenido;
 
     public Long getId() {
@@ -47,10 +46,11 @@ public class Publicacion {
         this.contenido = contenido;
     }
 
-    public Publicacion() {
+
+    public PublicacionDTO() {
     }
 
-    public Publicacion(Long id, String titulo, String descripcion, String contenido) {
+    public PublicacionDTO(Long id, String titulo, String descripcion, String contenido) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
