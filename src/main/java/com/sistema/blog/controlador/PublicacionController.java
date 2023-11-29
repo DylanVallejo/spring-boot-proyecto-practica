@@ -1,7 +1,9 @@
 package com.sistema.blog.controlador;
 
 import com.sistema.blog.dto.PublicacionDTO;
+import com.sistema.blog.dto.PublicacionRespuesta;
 import com.sistema.blog.service.PublicacionService;
+import com.sistema.blog.utility.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +21,15 @@ public class PublicacionController {
     private PublicacionService publicacionService;
 
     @GetMapping
-    public List<PublicacionDTO> listarPublicaciones(){
-        return publicacionService.obtenerTodasLasPublicaciones();
+    public PublicacionRespuesta listarPublicaciones(
+//            añadimos dos parametros page y pageSize que indicarna la cantidad de publicaciones y numero de pagina a utilizar
+//            estos parametors los obtenemos de esta forma ?page=1&pageSize=2
+            @RequestParam(value = "page", defaultValue = AppConstants.NUMERO_DE_PAGINA_POR_DEFECTO, required = false) int page,
+            @RequestParam(value = "pageSize", defaultValue = AppConstants.MEDIDA_DE_PAGINA_POR_DEFECTO,required = false) int pageSize,
+            @RequestParam(value = "sortBy", defaultValue = AppConstants.ORDENAR_POR_DEFECTO, required = false) String sortBy,
+            @RequestParam(value = "sortDir", defaultValue = AppConstants.ORDENAR_DIRECCION_POR_DEFECTO, required = false) String sortDir)
+    {
+        return publicacionService.obtenerTodasLasPublicaciones(page, pageSize,sortBy ,sortDir);
     }
 
     @PostMapping
