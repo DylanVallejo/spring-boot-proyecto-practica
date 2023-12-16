@@ -32,7 +32,7 @@ public class ComentarioServicioImp implements ComentarioService{
         comentarioDto.setId(comentario.getId());
         comentarioDto.setNombre(comentario.getNombre());
         comentarioDto.setEmail(comentario.getEmail());
-        comentarioDto.setCuerpo(comentarioDto.getCuerpo());
+        comentarioDto.setCuerpo(comentario.getCuerpo());
         return comentarioDto;
     }
 
